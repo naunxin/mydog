@@ -261,7 +261,7 @@ char getPidByName(pid_t *pid, char *task_name)
 			debugpri("minigui process status change, oldstauts = %d newstatus = %d\n",miniguistatus,miniguistatustemp);
 			miniguistatus = miniguistatustemp;		 
 		}
-		sleep(1);
+		usleep(100*1000);
 	} 
 
  }
@@ -476,7 +476,7 @@ void *LogServerLoop(void *arg)
 				ret = setsockopt(cliSockFd, SOL_SOCKET, SO_SNDBUF, (char *)&recvSize, sizeof(recvSize));
 				   
 				memset(recvBuf, 0, 1024);
-				recvLen = recv(cliSockFd, recvBuf, 2024, 0);
+				recvLen = recv(cliSockFd, recvBuf, 1024, 0);
 				if(recvLen <= 0)
 				{
 					debugpri("serverlog recv error\n");
